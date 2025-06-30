@@ -17,7 +17,11 @@ fastify.get('/db-test', async (request, reply) => {
         return reply.code(500).send({ conectado: false, erro: err.message });
     }        
 });
+// rotas externas da open library importadas do arquivo books.js
+const bookRoutes = require('./routes/books');
+fastify.register(bookRoutes, { prefix: '/books' });
 
+// inicializa o servidor
 fastify.listen ({ port:3001 }, (err) => {
     if (err) {
         fastify.log.error(err);
