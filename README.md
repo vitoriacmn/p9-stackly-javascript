@@ -20,3 +20,14 @@ Este projeto está sendo desenvolvido através de uma API RESTful (com protocolo
 - API Pública => Open Library
 - Documentação API => Swagger
 - Front End => React
+
+## Banco de Dados
+Tabelas:
+- Users
+- Genders
+- Books
+- Author
+- Editor
+- Comments
+- Likes
+- Book_status
