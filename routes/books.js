@@ -3,7 +3,59 @@ const axios = require('axios'); // axios é uma biblioteca JS para fazer requisi
 // criei uma constante chamada axios e importei ela no projeto
 
 async function bookRoutes (fastify, options) {
-    fastify.get('/search', async (request, reply) => {
+    fastify.get('/search', {
+        schema: {
+            description: 'Busca um livro pelo título ou ISBN usando a API da Open Library',
+            querystring: {
+                type: 'object',
+                properties: {
+                    isbn: { type: 'string', description: 'Código ISBN do Livro'},
+                    title: { type: 'string', description: 'Título do Livro'},
+                },
+            oneOf: [
+                { required: ['isbn']},
+                { required: ['title']}
+            ]
+            },
+        response: {
+            200: {
+                description: 'Livro encontrado',
+                type: 'object',
+                properties: {
+                    book_id: {type: 'string'},
+                    title: {type: 'string'},
+                    author: {type: 'string'},
+                    isbn: {type: 'string'}
+                }
+            },
+            400: {
+                description: 'Erro de validação',
+                type: 'object',
+                properties: {
+                    error: {type: 'string'}
+                }
+            },
+            404: {
+                description: 'Livro não encontrado',
+                type: 'object',
+                properties: {
+                    error: {type: 'string'}
+                }
+            },
+            500: {
+                description: 'Erro interno',
+                type: 'object',
+                properties: {
+                    error: {type: 'string'},
+                    detalhe: { type: 'string' },
+                    stack: { type: 'string' }
+                }
+            }
+        }
+        }
+    },
+        
+    async (request, reply) => {
         const { isbn, title } = request.query;
 
         try {
@@ -32,7 +84,7 @@ async function bookRoutes (fastify, options) {
                 const { data } = await
                 axios.get(`https://openlibrary.org/search.json?title=${encodeURIComponent(title)}`);
                 if (data.docs.length === 0) {
-                    return reply.code(404).send({ message: 'Livro não encontrado' });
+                    return reply.code(404).send({ error: 'Livro não encontrado' });
                 }
                 const book = data.docs[0];
                 result = {
