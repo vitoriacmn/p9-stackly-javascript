@@ -13,3 +13,10 @@ Este projeto está sendo desenvolvido através de uma API RESTful (com protocolo
 - Usuário - acesso à lista de favoritos (filtros: Ordem Alfabetica, Ordem de Publicação, Mais relevantes, Pesquisa por nome / gênero);
 - Permitir seguir outros usuários e ser seguido;
 - Permitir comentar e curtir livros; 
+
+## Tecnologias utilizadas
+- Banco de dados => PostegreSQL
+- Server e API => Node.JS com framework Fastify
+- API Pública => Open Library
+- Documentação API => Swagger
+- Front End => React
