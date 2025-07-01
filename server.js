@@ -21,6 +21,34 @@ fastify.get('/db-test', async (request, reply) => {
 const bookRoutes = require('./routes/books');
 fastify.register(bookRoutes, { prefix: '/books' });
 
+
+// documentação com swagger
+const fastifySwagger = require('@fastify/swagger');
+const fastifySwaggerUi = require('@fastify/swagger-ui');
+
+fastify.register(fastifySwagger, {
+    swagger: {
+        info: {
+            title: 'API Stackly',
+            description: 'Busca de livros por ISBN ou título usando a Open Library',
+            version: '1.0'
+        },
+        host: 'localhost: 3001',
+        schemes: ['http'],
+        consumes: ['application/json'],
+        produces: ['application/json']
+    }
+
+});
+
+fastify.register(fastifySwaggerUi, {
+    routePrefix: '/docs', 
+    uiConfig: {
+        docExpansion: 'full',
+        deepLinking: false
+    }
+});
+
 // inicializa o servidor
 fastify.listen ({ port:3001 }, (err) => {
     if (err) {
