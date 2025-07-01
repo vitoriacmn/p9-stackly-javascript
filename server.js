@@ -14,7 +14,7 @@ fastify.register(fastifySwagger, {
             description: 'Busca de livros por ISBN ou título usando a Open Library',
             version: '1.0'
         },
-        host: 'localhost: 3001',
+        host: 'localhost:3001',
         schemes: ['http'],
         consumes: ['application/json'],
         produces: ['application/json']
