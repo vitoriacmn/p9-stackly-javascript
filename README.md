@@ -1,4 +1,4 @@
-# Stackly
+# Stackly (em produção)
 Programa que serve como um catálogo de livros, uma estante virtual em que o usuário adiciona suas leituras, podendo adicionar em listas de 'favoritos, quero ler, lendo e lido'.
 Multi-tenant: cada usuário pode criar suas próprias listas e interagir de forma independente e conjunta.
 
